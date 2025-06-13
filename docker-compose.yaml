@@ -15,3 +15,4 @@ services:
     volumes:
       - ./dist:/var/lib/grafana/plugins/ni-systemlink-app
       - ./provisioning:/etc/grafana/provisioning
+      - ./conf/defaults.ini:/usr/share/grafana/conf/defaults.ini
