@@ -16,7 +16,7 @@ import {
   DataQueryResponseData,
   toUtc,
 } from '@grafana/data';
-import { getBackendSrv, getTemplateSrv, FetchError } from '@grafana/runtime';
+import { getBackendSrv, getTemplateSrv, FetchError, FetchResponse } from '@grafana/runtime';
 import {
   NotebookQuery,
   NotebookDataSourceOptions,
@@ -169,7 +169,7 @@ export class DataSource extends DataSourceApi<NotebookQuery, NotebookDataSourceO
 
   private async executeNotebook(notebookId: string, workspaceId: string, parameters: any, cacheTimeout: number) {
     try {
-      const response = await getBackendSrv().datasourceRequest({
+      const response: FetchResponse = await getBackendSrv().datasourceRequest({
         url: this.url + '/ninbexecution/v1/executions',
         method: 'POST',
         data: [
@@ -189,7 +189,7 @@ export class DataSource extends DataSourceApi<NotebookQuery, NotebookDataSourceO
   }
 
   private async handleNotebookExecution(id: string): Promise<Execution> {
-    const response = await getBackendSrv().datasourceRequest({
+    const response: FetchResponse = await getBackendSrv().datasourceRequest({
       url: this.url + '/ninbexecution/v1/executions/' + id,
       method: 'GET',
     });
